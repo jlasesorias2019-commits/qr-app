@@ -2,10 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Generador QR - Las Enseñanzas de Luis</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <div class="container">
     <h1>Generador de Códigos QR</h1>
 
@@ -16,16 +18,17 @@
 
     <div id="qr"></div>
 
-    <button class="download" onclick="downloadQR()">Descargar QR</button>
+    <button class="download" id="downloadBtn" onclick="downloadQR()">
+      Descargar QR
+    </button>
+
+    <p class="disclaimer">
+      El contenido del QR y su uso son responsabilidad de quien lo genera. Evita compartir información sensible.
+    </p>
   </div>
 
-  <!-- Librería QR -->
   <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
-
-  <!-- Librería para convertir dominios con ñ -->
-  <script src="https://cdn.jsdelivr.net/npm/punycode@2.3.0/punycode.min.js"></script>
-
-  <!-- Tu lógica -->
   <script src="app.js"></script>
+
 </body>
 </html>
