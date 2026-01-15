@@ -5,8 +5,8 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 20px; /* Para que no se pegue en móvil */
+  align-items: flex-start;      /* Para que no quede flotando al centro vertical */
+  padding: 80px 20px 20px;      /* Separación superior para que respire */
   box-sizing: border-box;
 }
 
@@ -29,7 +29,7 @@ h1 {
   gap: 10px;
   margin-bottom: 20px;
   justify-content: center;
-  flex-wrap: wrap; /* Permite que se acomode en móvil */
+  flex-wrap: wrap;              /* Permite que se acomode en móvil */
 }
 
 input {
@@ -38,16 +38,18 @@ input {
   max-width: 100%;
   border-radius: 6px;
   border: 1px solid #ccc;
+  font-size: 14px;
 }
 
 button {
   padding: 10px 20px;
-  margin: 10px;
+  margin: 10px 0;
   border: none;
   border-radius: 6px;
   background-color: #1f3c88;
   color: white;
   cursor: pointer;
+  font-size: 14px;
 }
 
 button:hover {
@@ -73,10 +75,10 @@ button:disabled {
 }
 
 .disclaimer {
-  font-size: 12px;
+  font-size: 13px;
   color: #666;
-  margin-top: 20px;
-  max-width: 600px;
+  margin-top: 18px;
+  max-width: 520px;
   text-align: center;
-  line-height: 1.4;
+  line-height: 1.5;
 }
