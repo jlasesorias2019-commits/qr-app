@@ -3,33 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generador QR - Las Enseñanzas de Luis</title>
+  <title>Generador QR</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
-    <h1>Generador de Códigos QR</h1>
+<div class="container">
+  <h1>Generador de Códigos QR</h1>
 
-    <div class="controls">
-      <label for="qrText" class="sr-only">Texto o enlace para el QR</label>
-      <input id="qrText" type="text" placeholder="Escribe un texto o enlace">
-      <button type="button" onclick="generateQR()">Generar QR</button>
-    </div>
-
-    <div id="qr"></div>
-
-    <button type="button" class="download" id="downloadBtn" onclick="downloadQR()">
-      Descargar QR
-    </button>
-
-    <p class="disclaimer">
-      El contenido del QR y su uso son responsabilidad de quien lo genera. Evita compartir información sensible.
-    </p>
+  <div class="controls">
+    <input id="qrText" type="text" placeholder="Escribe un texto o enlace">
+    <button id="generateBtn">Generar QR</button>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="app.js"></script>
+  <div id="qr"></div>
+
+  <button class="download" id="downloadBtn">Descargar QR</button>
+
+  <p class="disclaimer">
+    El contenido del QR y su uso son responsabilidad de quien lo genera.
+  </p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>
