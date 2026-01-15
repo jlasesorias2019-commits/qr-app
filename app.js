@@ -1,14 +1,15 @@
 let qr;
 
 function generateQR() {
-  const text = document.getElementById("qrText").value;
+  const text = document.getElementById("qrText").value.trim();
   const qrDiv = document.getElementById("qr");
-  qrDiv.innerHTML = "";
 
   if (!text) {
     alert("Escribe algo primero 🙂");
     return;
   }
+
+  qrDiv.innerHTML = "";
 
   qr = new QRCode(qrDiv, {
     text: text,
