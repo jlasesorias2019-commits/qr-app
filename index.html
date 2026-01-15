@@ -12,26 +12,27 @@
     <h1>Generador de Códigos QR</h1>
 
     <div class="controls">
-      <label for="qrText" class="sr-only">Texto para generar el código QR</label>
+      <!-- Label solo para accesibilidad (no visible) -->
+      <label for="qrText" class="sr-only">Texto o enlace para generar el código QR</label>
       <input id="qrText" type="text" placeholder="Escribe un texto o enlace">
       <button onclick="generateQR()">Generar QR</button>
     </div>
 
     <div id="qr"></div>
 
-    <button class="download" id="downloadBtn" onclick="downloadQR()" disabled>Descargar QR</button>
+    <button class="download" id="downloadBtn" onclick="downloadQR()" disabled>
+      Descargar QR
+    </button>
 
     <p class="disclaimer">
-      Esta herramienta genera códigos QR a partir de la información que introduce el usuario. 
-      El contenido y el uso del QR son responsabilidad de quien lo genera. 
-      No compartas información sensible si no es necesario.
+      El contenido del QR y su uso son responsabilidad de quien lo genera. Evita compartir información sensible.
     </p>
   </div>
 
-  <!-- Librería QR -->
+  <!-- Librería para generar QR -->
   <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
 
-  <!-- Librería para convertir dominios con ñ -->
+  <!-- Librería para convertir dominios con ñ (Punycode) -->
   <script src="https://cdn.jsdelivr.net/npm/punycode@2.3.0/punycode.min.js"></script>
 
   <!-- Lógica de la app -->
