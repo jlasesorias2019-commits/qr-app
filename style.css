@@ -6,10 +6,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px; /* Para que no se pegue en móvil */
+  box-sizing: border-box;
 }
 
 h1 {
   color: #1f3c88;
+  margin-bottom: 20px;
 }
 
 .container {
@@ -17,6 +20,8 @@ h1 {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  max-width: 700px;
+  width: 100%;
 }
 
 .controls {
@@ -24,11 +29,13 @@ h1 {
   gap: 10px;
   margin-bottom: 20px;
   justify-content: center;
+  flex-wrap: wrap; /* Permite que se acomode en móvil */
 }
 
 input {
   padding: 10px;
   width: 280px;
+  max-width: 100%;
   border-radius: 6px;
   border: 1px solid #ccc;
 }
@@ -45,6 +52,11 @@ button {
 
 button:hover {
   opacity: 0.9;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 #qr {
