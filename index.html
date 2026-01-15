@@ -12,13 +12,15 @@
     <h1>Generador de Códigos QR</h1>
 
     <div class="controls">
-      <input id="qrText" type="text" placeholder="Escribe tu enlace o texto aquí" />
+      <!-- Label solo para accesibilidad (no visible) -->
+      <label for="qrText" class="sr-only">Texto o enlace para generar el código QR</label>
+      <input id="qrText" type="text" placeholder="Escribe un texto o enlace">
       <button onclick="generateQR()">Generar QR</button>
     </div>
 
     <div id="qr"></div>
 
-    <button class="download" id="downloadBtn" onclick="downloadQR()" style="display:none">
+    <button class="download" id="downloadBtn" onclick="downloadQR()" disabled>
       Descargar QR
     </button>
 
@@ -27,8 +29,13 @@
     </p>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  
+  <!-- Librería para generar QR -->
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+
+  <!-- Librería para convertir dominios con ñ (Punycode) -->
+  <script src="https://cdn.jsdelivr.net/npm/punycode@2.3.0/punycode.min.js"></script>
+
+  <!-- Lógica de la app -->
   <script src="app.js"></script>
 
 </body>
