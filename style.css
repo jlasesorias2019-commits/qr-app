@@ -9,6 +9,18 @@ h1 {
   color: #1f3c88;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
 input {
   padding: 10px;
   width: 280px;
@@ -29,8 +41,13 @@ button {
 button:hover {
   opacity: 0.9;
 }
+
 #qr {
-  margin-top: 20px;
+  margin: 20px 0;
   display: flex;
   justify-content: center;
+}
+
+.download {
+  margin-top: 10px;
 }
