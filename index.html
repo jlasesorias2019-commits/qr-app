@@ -12,29 +12,22 @@
     <h1>Generador de Códigos QR</h1>
 
     <div class="controls">
-      <!-- Label solo para accesibilidad (no visible) -->
       <input id="qrText" type="text" placeholder="Escribe un texto o enlace">
       <button onclick="generateQR()">Generar QR</button>
     </div>
 
     <div id="qr"></div>
 
-<button class="download" id="downloadBtn" onclick="downloadQR()" disabled>
-  Descargar QR
-</button>
+    <button class="download" id="downloadBtn" onclick="downloadQR()">
+      Descargar QR
+    </button>
 
     <p class="disclaimer">
       El contenido del QR y su uso son responsabilidad de quien lo genera. Evita compartir información sensible.
     </p>
   </div>
 
-  <!-- Librería para generar QR -->
   <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
-
-  <!-- Librería para convertir dominios con ñ (Punycode) -->
-  <script src="https://cdn.jsdelivr.net/npm/punycode@2.3.0/punycode.min.js"></script>
-
-  <!-- Lógica de la app -->
   <script src="app.js"></script>
 
 </body>
