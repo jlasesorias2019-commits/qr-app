@@ -14,13 +14,10 @@ function downloadQR() {
     return;
   }
 
-  // Si está dentro de Google Sites (iframe), abrir en pestaña nueva
   const a = document.createElement("a");
   a.href = dataUrl;
   a.target = "_blank";
   a.rel = "noopener noreferrer";
-
-  // Intento de descarga (funciona fuera del iframe)
   a.download = "codigo-qr.png";
 
   document.body.appendChild(a);
