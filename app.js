@@ -1,54 +1,29 @@
-document.addEventListener("DOMContentLoaded", () => {
-
-  const generateBtn = document.getElementById("generateBtn");
-  const downloadBtn = document.getElementById("downloadBtn");
-  const input = document.getElementById("qrText");
+function downloadQR() {
   const qrDiv = document.getElementById("qr");
+  const canvas = qrDiv.querySelector("canvas");
+  const img = qrDiv.querySelector("img");
 
-  generateBtn.addEventListener("click", generateQR);
-  downloadBtn.addEventListener("click", downloadQR);
+  let dataUrl = null;
 
-  function generateQR() {
-    const text = input.value.trim();
-
-    if (!text) {
-      alert("Escribe algo primero 🙂");
-      return;
-    }
-
-    qrDiv.innerHTML = "";
-
-    if (typeof QRCode === "undefined") {
-      alert("No se pudo cargar la librería QR.");
-      return;
-    }
-
-    new QRCode(qrDiv, {
-      text: text,
-      width: 256,
-      height: 256,
-    });
+  if (canvas) {
+    dataUrl = canvas.toDataURL("image/png");
+  } else if (img) {
+    dataUrl = img.src;
+  } else {
+    alert("Primero genera un QR 🙂");
+    return;
   }
 
-  function downloadQR() {
-    const canvas = qrDiv.querySelector("canvas");
-    const img = qrDiv.querySelector("img");
+  // Si está dentro de Google Sites (iframe), abrir en pestaña nueva
+  const a = document.createElement("a");
+  a.href = dataUrl;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
 
-    let dataUrl = null;
+  // Intento de descarga (funciona fuera del iframe)
+  a.download = "codigo-qr.png";
 
-    if (canvas) {
-      dataUrl = canvas.toDataURL("image/png");
-    } else if (img) {
-      dataUrl = img.src;
-    } else {
-      alert("Primero genera un QR 🙂");
-      return;
-    }
-
-    const link = document.createElement("a");
-    link.href = dataUrl;
-    link.download = "codigo-qr.png";
-    link.click();
-  }
-
-});
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
