@@ -11,15 +11,21 @@ function generateQR() {
 
   qrDiv.innerHTML = "";
 
-  // Normalizamos texto para evitar problemas Unicode (ñ, acentos, etc.)
+  // Normalizar unicode
   text = text.normalize("NFC");
 
-  // Si es una URL válida, la normalizamos con el parser del navegador
+  // Intentar procesar como URL
   try {
     const url = new URL(text);
-    text = url.toString();
+    const asciiHost = punycode.toASCII(url.hostname);
+
+    // Reemplazar hostname por versión ASCII
+    const finalUrl =
+      url.protocol + "//" + asciiHost + url.pathname + url.search + url.hash;
+
+    text = finalUrl;
   } catch (e) {
-    // No es URL, se deja como texto normal (ej. "hola", "evento", etc.)
+    // No es URL → se deja como texto plano
   }
 
   qr = new QRCode(qrDiv, {
