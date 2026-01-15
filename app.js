@@ -1,31 +1,3 @@
-let qr;
-
-function generateQR() {
-  const text = document.getElementById("qrText").value.trim();
-  const qrDiv = document.getElementById("qr");
-  const downloadBtn = document.getElementById("downloadBtn");
-
-  if (!text) {
-    alert("Escribe algo primero 🙂");
-    return;
-  }
-
-  qrDiv.innerHTML = "";
-  downloadBtn.disabled = true;
-
-  qr = new QRCode(qrDiv, {
-    text: text,
-    width: 256,
-    height: 256,
-    correctLevel: QRCode.CorrectLevel.H
-  });
-
-  // Esperamos un momento a que se genere el QR
-  setTimeout(() => {
-    downloadBtn.disabled = false;
-  }, 300);
-}
-
 function downloadQR() {
   const qrDiv = document.getElementById("qr");
   const canvas = qrDiv.querySelector("canvas");
@@ -34,7 +6,12 @@ function downloadQR() {
   let dataUrl = null;
 
   if (canvas) {
-    dataUrl = canvas.toDataURL("image/png");
+    try {
+      dataUrl = canvas.toDataURL("image/png");
+    } catch (e) {
+      alert("No se puede descargar este QR en este navegador. Intenta desde Chrome o una computadora.");
+      return;
+    }
   } else if (img) {
     dataUrl = img.src;
   } else {
@@ -45,5 +22,10 @@ function downloadQR() {
   const link = document.createElement("a");
   link.href = dataUrl;
   link.download = "codigo-qr.png";
-  link.click();
+  document.body.appendChild(link);
+
+  requestAnimationFrame(() => {
+    link.click();
+    document.body.removeChild(link);
+  });
 }
