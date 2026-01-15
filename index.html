@@ -6,14 +6,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Generador de Códigos QR</h1>
-  <input id="qrText" type="text" placeholder="Escribe un texto o enlace">
-  <button onclick="generateQR()">Generar QR</button>
-  <div id="qr"></div>
-  <br>
-  <button onclick="downloadQR()">Descargar QR</button>
+  <div class="container">
+    <h1>Generador de Códigos QR</h1>
+
+    <div class="controls">
+      <input id="qrText" type="text" placeholder="Escribe un texto o enlace">
+      <button onclick="generateQR()">Generar QR</button>
+    </div>
+
+    <div id="qr"></div>
+
+    <button class="download" onclick="downloadQR()">Descargar QR</button>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>
