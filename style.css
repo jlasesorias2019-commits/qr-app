@@ -54,3 +54,13 @@ button:hover {
 .download {
   margin-top: 10px;
 }
+
+#qr {
+  width: 256px;
+  height: 256px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
