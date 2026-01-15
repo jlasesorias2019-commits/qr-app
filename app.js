@@ -1,24 +1,25 @@
-let qr;
+let qr; // Variable global para guardar la instancia del QR
 
 function generateQR() {
-  let text = document.getElementById("qrText").value.trim();
+  const textInput = document.getElementById("qrText");
+  const text = textInput.value.trim();
   const qrDiv = document.getElementById("qr");
   const downloadBtn = document.getElementById("downloadBtn");
 
+  // Validación: Si no hay texto, avisamos y salimos
   if (!text) {
-    alert("Escribe algo primero 🙂");
+    alert("¡Por favor escribe algo para convertir a QR!");
     return;
   }
 
-  // Limpiamos el contenido anterior
+  // 1. Limpiamos el código QR anterior (si había uno)
   qrDiv.innerHTML = "";
   
-  // Ocultamos el botón de descarga mientras se genera el nuevo
+  // 2. Ocultamos el botón de descarga momentáneamente
   downloadBtn.style.display = "none";
 
-  text = text.normalize("NFC");
-
-  // Generamos el QR
+  // 3. Generamos el nuevo QR
+  // Usamos un pequeño retraso para asegurar que el DOM esté listo
   qr = new QRCode(qrDiv, {
     text: text,
     width: 256,
@@ -28,36 +29,27 @@ function generateQR() {
     correctLevel : QRCode.CorrectLevel.H
   });
 
-  // Mostramos el botón de descarga después de un breve momento
-  // para asegurar que el QR se haya pintado.
+  // 4. Mostramos el botón de descarga
+  // Le damos 500ms para asegurar que la imagen se renderice
   setTimeout(() => {
-    downloadBtn.style.display = "block";
-  }, 300);
+    downloadBtn.style.display = "inline-block";
+  }, 500);
 }
 
 function downloadQR() {
   const qrDiv = document.getElementById("qr");
-  // La librería genera un canvas y luego una imagen (img). 
-  // Intentamos obtener la imagen primero (es más seguro para descargar).
+  // Buscamos la imagen generada por la librería
   const img = qrDiv.querySelector("img");
-  
+
   if (img && img.src) {
+    // Creamos un enlace temporal para forzar la descarga
     const link = document.createElement("a");
     link.href = img.src;
-    link.download = "codigo-qr.png";
-    document.body.appendChild(link); // Requerido por algunos navegadores (Firefox)
+    link.download = "codigo-qr-luis.png";
+    document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   } else {
-    // Fallback por si la imagen no está lista, intentamos con el canvas
-    const canvas = qrDiv.querySelector("canvas");
-    if(canvas) {
-        const link = document.createElement("a");
-        link.href = canvas.toDataURL("image/png");
-        link.download = "codigo-qr.png";
-        link.click();
-    } else {
-        alert("Hubo un error al leer el QR. Intenta generarlo de nuevo.");
-    }
+    alert("Hubo un problema al generar la imagen. Intenta darle a 'Generar' otra vez.");
   }
 }
