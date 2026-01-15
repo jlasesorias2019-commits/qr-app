@@ -10,12 +10,22 @@ function generateQR() {
   }
 
   qrDiv.innerHTML = "";
+
   text = text.normalize("NFC");
 
+  // Si es URL, convertir dominio con ñ a punycode
   try {
     const url = new URL(text);
+
+    // Convertimos solo el hostname si tiene caracteres especiales
+    const punycodeDomain = punycode.toASCII(url.hostname);
+
+    url.hostname = punycodeDomain;
     text = url.toString();
-  } catch (e) {}
+
+  } catch (e) {
+    // No es URL → se deja como texto normal
+  }
 
   qr = new QRCode(qrDiv, {
     text: text,
