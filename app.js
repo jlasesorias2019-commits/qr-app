@@ -10,23 +10,12 @@ function generateQR() {
   }
 
   qrDiv.innerHTML = "";
-
-  // Normalizar unicode
   text = text.normalize("NFC");
 
-  // Intentar procesar como URL
   try {
     const url = new URL(text);
-    const asciiHost = punycode.toASCII(url.hostname);
-
-    // Reemplazar hostname por versión ASCII
-    const finalUrl =
-      url.protocol + "//" + asciiHost + url.pathname + url.search + url.hash;
-
-    text = finalUrl;
-  } catch (e) {
-    // No es URL → se deja como texto plano
-  }
+    text = url.toString();
+  } catch (e) {}
 
   qr = new QRCode(qrDiv, {
     text: text,
@@ -36,15 +25,23 @@ function generateQR() {
 }
 
 function downloadQR() {
-  const img = document.querySelector("#qr img");
+  const qrDiv = document.getElementById("qr");
+  const canvas = qrDiv.querySelector("canvas");
+  const img = qrDiv.querySelector("img");
 
-  if (!img) {
+  let dataUrl = null;
+
+  if (canvas) {
+    dataUrl = canvas.toDataURL("image/png");
+  } else if (img) {
+    dataUrl = img.src;
+  } else {
     alert("Primero genera un QR 🙂");
     return;
   }
 
   const link = document.createElement("a");
-  link.href = img.src;
+  link.href = dataUrl;
   link.download = "codigo-qr.png";
   link.click();
 }
