@@ -8,20 +8,20 @@ function generateQR() {
   }
 
   qrDiv.innerHTML = "";
-  text = text.normalize("NFC");
 
   try {
     const url = new URL(text);
 
-    const asciiHostname = url.hostname
-      .split(".")
-      .map(part => part.normalize("NFC").replace(/ñ/g, "xn--n"))
-      .join(".");
+    // Forzamos al navegador a convertir el hostname a ASCII (punycode)
+    const asciiUrl = url.href.normalize("NFC");
 
-    url.hostname = asciiHostname;
-    text = url.toString();
+    // El navegador ya expone la versión ASCII aquí:
+    const fixedUrl = url.protocol + "//" + url.host + url.pathname + url.search + url.hash;
 
-  } catch (e) {}
+    text = fixedUrl;
+  } catch (e) {
+    // No es URL → se deja como texto normal
+  }
 
   qr = new QRCode(qrDiv, {
     text: text,
