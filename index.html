@@ -2,41 +2,30 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Generador QR - Las Enseñanzas de Luis</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <div class="container">
     <h1>Generador de Códigos QR</h1>
 
     <div class="controls">
-      <!-- Label solo para accesibilidad (no visible) -->
-      <label for="qrText" class="sr-only">Texto o enlace para generar el código QR</label>
       <input id="qrText" type="text" placeholder="Escribe un texto o enlace">
       <button onclick="generateQR()">Generar QR</button>
     </div>
 
     <div id="qr"></div>
 
-    <button class="download" id="downloadBtn" onclick="downloadQR()" disabled>
-      Descargar QR
-    </button>
-
-    <p class="disclaimer">
-      El contenido del QR y su uso son responsabilidad de quien lo genera. Evita compartir información sensible.
-    </p>
+    <button class="download" onclick="downloadQR()">Descargar QR</button>
   </div>
 
-  <!-- Librería para generar QR -->
+  <!-- Librería QR -->
   <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
 
-  <!-- Librería para convertir dominios con ñ (Punycode) -->
+  <!-- Librería para convertir dominios con ñ -->
   <script src="https://cdn.jsdelivr.net/npm/punycode@2.3.0/punycode.min.js"></script>
 
-  <!-- Lógica de la app -->
+  <!-- Tu lógica -->
   <script src="app.js"></script>
-
 </body>
 </html>
