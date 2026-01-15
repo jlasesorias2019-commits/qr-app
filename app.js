@@ -1,8 +1,9 @@
 let qr;
 
 function generateQR() {
-  let text = document.getElementById("qrText").value.trim();
+  const text = document.getElementById("qrText").value.trim();
   const qrDiv = document.getElementById("qr");
+  const downloadBtn = document.getElementById("downloadBtn");
 
   if (!text) {
     alert("Escribe algo primero 🙂");
@@ -10,41 +11,39 @@ function generateQR() {
   }
 
   qrDiv.innerHTML = "";
-
-  // Normalizar unicode
-  text = text.normalize("NFC");
-
-  // Intentar procesar como URL
-  try {
-    const url = new URL(text);
-    const asciiHost = punycode.toASCII(url.hostname);
-
-    // Reemplazar hostname por versión ASCII
-    const finalUrl =
-      url.protocol + "//" + asciiHost + url.pathname + url.search + url.hash;
-
-    text = finalUrl;
-  } catch (e) {
-    // No es URL → se deja como texto plano
-  }
+  downloadBtn.disabled = true;
 
   qr = new QRCode(qrDiv, {
     text: text,
     width: 256,
     height: 256,
+    correctLevel: QRCode.CorrectLevel.H
   });
+
+  // Esperamos un momento a que se genere el QR
+  setTimeout(() => {
+    downloadBtn.disabled = false;
+  }, 300);
 }
 
 function downloadQR() {
-  const img = document.querySelector("#qr img");
+  const qrDiv = document.getElementById("qr");
+  const canvas = qrDiv.querySelector("canvas");
+  const img = qrDiv.querySelector("img");
 
-  if (!img) {
+  let dataUrl = null;
+
+  if (canvas) {
+    dataUrl = canvas.toDataURL("image/png");
+  } else if (img) {
+    dataUrl = img.src;
+  } else {
     alert("Primero genera un QR 🙂");
     return;
   }
 
   const link = document.createElement("a");
-  link.href = img.src;
+  link.href = dataUrl;
   link.download = "codigo-qr.png";
   link.click();
 }
