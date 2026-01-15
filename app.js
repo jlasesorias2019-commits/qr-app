@@ -1,3 +1,5 @@
+let qr;
+
 function generateQR() {
   let text = document.getElementById("qrText").value.trim();
   const qrDiv = document.getElementById("qr");
@@ -12,13 +14,9 @@ function generateQR() {
   try {
     const url = new URL(text);
 
-    // Forzamos al navegador a convertir el hostname a ASCII (punycode)
-    const asciiUrl = url.href.normalize("NFC");
+    // Normalizamos y usamos la versión que el navegador entiende
+    text = url.href;
 
-    // El navegador ya expone la versión ASCII aquí:
-    const fixedUrl = url.protocol + "//" + url.host + url.pathname + url.search + url.hash;
-
-    text = fixedUrl;
   } catch (e) {
     // No es URL → se deja como texto normal
   }
@@ -28,4 +26,26 @@ function generateQR() {
     width: 256,
     height: 256,
   });
+}
+
+function downloadQR() {
+  const qrDiv = document.getElementById("qr");
+  const canvas = qrDiv.querySelector("canvas");
+  const img = qrDiv.querySelector("img");
+
+  let dataUrl = null;
+
+  if (canvas) {
+    dataUrl = canvas.toDataURL("image/png");
+  } else if (img) {
+    dataUrl = img.src;
+  } else {
+    alert("Primero genera un QR 🙂");
+    return;
+  }
+
+  const link = document.createElement("a");
+  link.href = dataUrl;
+  link.download = "codigo-qr.png";
+  link.click();
 }
