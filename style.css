@@ -5,11 +5,14 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding: 80px 20px 20px;
+  box-sizing: border-box;
 }
 
 h1 {
   color: #1f3c88;
+  margin-bottom: 20px;
 }
 
 .container {
@@ -17,6 +20,8 @@ h1 {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  max-width: 700px;
+  width: 100%;
 }
 
 .controls {
@@ -24,23 +29,27 @@ h1 {
   gap: 10px;
   margin-bottom: 20px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 input {
   padding: 10px;
   width: 280px;
+  max-width: 100%;
   border-radius: 6px;
   border: 1px solid #ccc;
+  font-size: 14px;
 }
 
 button {
   padding: 10px 20px;
-  margin: 10px;
+  margin: 10px 0;
   border: none;
   border-radius: 6px;
   background-color: #1f3c88;
   color: white;
   cursor: pointer;
+  font-size: 14px;
 }
 
 button:hover {
@@ -48,9 +57,23 @@ button:hover {
 }
 
 #qr {
+  width: 256px;
+  height: 256px;
   margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .download {
   margin-top: 10px;
+}
+
+.disclaimer {
+  font-size: 13px;
+  color: #666;
+  margin-top: 18px;
+  max-width: 520px;
+  text-align: center;
+  line-height: 1.5;
 }
