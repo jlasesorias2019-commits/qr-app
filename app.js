@@ -20,26 +20,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
- function generateQR() {
-  let text = input.value.trim();
-  if (!text) return alert("Escribe algo");
+  function downloadQR() {
+    const canvas = qrDiv.querySelector("canvas");
+    const img = qrDiv.querySelector("img");
 
-  try {
-    const url = new URL(text);
+    let dataUrl = canvas ? canvas.toDataURL("image/png") : img?.src;
 
-    // Si el dominio tiene ñ, lo convertimos manualmente a punycode válido
-    if (url.hostname.includes("ñ")) {
-      url.hostname = "xn--" + url.hostname.replace("ñ", "n--");
-    }
+    if (!dataUrl) return alert("Primero genera un QR");
 
-    text = url.href;
-  } catch (e) {}
-
-  qrDiv.innerHTML = "";
-
-  new QRCode(qrDiv, {
-    text: text,
-    width: 256,
-    height: 256,
-  });
-}
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = "codigo-qr.png";
+    a.target = "_blank";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+});
