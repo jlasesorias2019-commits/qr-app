@@ -1,26 +1,39 @@
-function downloadQR() {
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("qrText");
+  const generateBtn = document.getElementById("generateBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
   const qrDiv = document.getElementById("qr");
-  const canvas = qrDiv.querySelector("canvas");
-  const img = qrDiv.querySelector("img");
 
-  let dataUrl = null;
+  generateBtn.addEventListener("click", generateQR);
+  downloadBtn.addEventListener("click", downloadQR);
 
-  if (canvas) {
-    dataUrl = canvas.toDataURL("image/png");
-  } else if (img) {
-    dataUrl = img.src;
-  } else {
-    alert("Primero genera un QR 🙂");
-    return;
+  function generateQR() {
+    const text = input.value.trim();
+    if (!text) return alert("Escribe algo");
+
+    qrDiv.innerHTML = "";
+
+    new QRCode(qrDiv, {
+      text: text,
+      width: 256,
+      height: 256,
+    });
   }
 
-  const a = document.createElement("a");
-  a.href = dataUrl;
-  a.target = "_blank";
-  a.rel = "noopener noreferrer";
-  a.download = "codigo-qr.png";
+  function downloadQR() {
+    const canvas = qrDiv.querySelector("canvas");
+    const img = qrDiv.querySelector("img");
 
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
+    let dataUrl = canvas ? canvas.toDataURL("image/png") : img?.src;
+
+    if (!dataUrl) return alert("Primero genera un QR");
+
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = "codigo-qr.png";
+    a.target = "_blank";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+});
