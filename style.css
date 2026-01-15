@@ -50,10 +50,15 @@ button {
   color: white;
   cursor: pointer;
   font-size: 14px;
+  transition: opacity 0.2s ease, transform 0.1s ease;
 }
 
 button:hover {
   opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.97);
 }
 
 #qr {
@@ -63,6 +68,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .download {
