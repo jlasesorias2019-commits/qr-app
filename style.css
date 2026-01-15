@@ -5,8 +5,8 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;      /* Para que no quede flotando al centro vertical */
-  padding: 80px 20px 20px;      /* Separación superior para que respire */
+  align-items: flex-start;
+  padding: 80px 20px 20px;
   box-sizing: border-box;
 }
 
@@ -29,7 +29,7 @@ h1 {
   gap: 10px;
   margin-bottom: 20px;
   justify-content: center;
-  flex-wrap: wrap;              /* Permite que se acomode en móvil */
+  flex-wrap: wrap;
 }
 
 input {
@@ -54,11 +54,6 @@ button {
 
 button:hover {
   opacity: 0.9;
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 #qr {
